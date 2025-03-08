@@ -909,6 +909,6 @@ if st.sidebar.button("Pelajaran pertama"):
 </body>
 </html>
     '''
-    st.components.v1.html(tulisan_html2,height=1600)
+        st.components.v1.html(tulisan_html2,height=1600)
 if st.sidebar.button("Pelajaran Kedua"):
     pass
