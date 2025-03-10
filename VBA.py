@@ -924,4 +924,4 @@ if st.sidebar.button("Pelajaran Kedua"):
     if st.button("Kirim") and user_input:
         response = st.session_state.chat.send_message(user_input)
         st.write("🧠 **Gemini AI:**", response.text)
-st.write(st.sidebar.button("Pelajaran Kedua"))
+
