@@ -914,7 +914,7 @@ if st.sidebar.button("Pelajaran Kedua"):
     genai.configure(api_key="AIzaSyDdh2-QQc15-gLC4T3WJz4eatMc21bv0iA")
     model = genai.GenerativeModel("gemini-1.5-pro")
 
-    st.title("🤖 Chatbot Gemini AI")
+    st.title("🤖 Chatbot Robot Martin AI")
 
     if "chat" not in st.session_state:
         st.session_state.chat = model.start_chat()
@@ -923,5 +923,5 @@ if st.sidebar.button("Pelajaran Kedua"):
 
     if st.button("Kirim") and user_input:
         response = st.session_state.chat.send_message(user_input)
-        st.write("🧠 **Gemini AI:**", response.text)
+        st.write("🧠 **Robot AI:**", response.text)
 
