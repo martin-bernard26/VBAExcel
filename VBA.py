@@ -911,17 +911,18 @@ if st.sidebar.button("Pelajaran pertama"):
     '''
         st.components.v1.html(tulisan_html2,height=1600)
 if st.sidebar.button("Pelajaran Kedua"):
-    genai.configure(api_key="AIzaSyDdh2-QQc15-gLC4T3WJz4eatMc21bv0iA")
-    model = genai.GenerativeModel("gemini-1.5-pro")
+    pass
+genai.configure(api_key="AIzaSyDdh2-QQc15-gLC4T3WJz4eatMc21bv0iA")
+model = genai.GenerativeModel("gemini-1.5-pro")
 
-    st.title("🤖 Chatbot Robot Martin AI")
+st.title("🤖 Chatbot Robot Martin AI")
 
-    if "chat" not in st.session_state:
-        st.session_state.chat = model.start_chat()
+if "chat" not in st.session_state:
+    st.session_state.chat = model.start_chat()
 
-    user_input = st.text_input("Ketik pesan...")
+user_input = st.text_input("Ketik pesan...")
 
-    if st.button("Kirim") and user_input:
-        response = st.session_state.chat.send_message(user_input)
-        st.write("🧠 **Robot AI:**", response.text)
+if st.button("Kirim") and user_input:
+    response = st.session_state.chat.send_message(user_input)
+    st.write("🧠 **Robot AI:**", response.text)
 
