@@ -1,5 +1,15 @@
 import streamlit as st
 import google.generativeai as genai
+
+# Gantilah dengan API key Anda
+API_KEY = "AIzaSyDdh2-QQc15-gLC4T3WJz4eatMc21bv0iA"
+
+# Konfigurasi API key
+genai.configure(api_key=API_KEY)
+
+# Pilih model Gemini (misalnya, Gemini 1.5 Pro)
+model = genai.GenerativeModel("gemini-1.5-pro")
+
 st.markdown('''
     <style>
            #judul{
@@ -910,19 +920,687 @@ if st.sidebar.button("Pelajaran pertama"):
 </html>
     '''
         st.components.v1.html(tulisan_html2,height=1600)
+if "genai" not in st.session_state:
+    st.session_state["genai"] = False
+if "isian" not in st.session_state:
+    st.session_state["isian"]=""
+def nyalakan():
+    st.session_state['genai'] = True
+def matikan():
+    st.session_state['genai'] = False
+
 if st.sidebar.button("Pelajaran Kedua"):
-    pass
-genai.configure(api_key="AIzaSyDdh2-QQc15-gLC4T3WJz4eatMc21bv0iA")
-model = genai.GenerativeModel("gemini-1.5-pro")
+    bagian1 = st.tabs(["Kata Pengantar","Contoh Penggunaan AI", "Media AI", "Penilaian dan Masukan"])
+    with bagian1[2]:
+        st.session_state['genai'] = False
+        st.session_state["isian"]=""
+        st.markdown('''
+        <div style="font-family:'snap itc';font-size:20px">Contoh Koding hasil dari AI</div>
+        ''',unsafe_allow_html=True)
+        st.code('''
+            Sub SolveEquation()
+            ' Deklarasi variabel
+            Dim x As Double
 
-st.title("🤖 Chatbot Robot Martin AI")
+            ' Selesaikan persamaan 2x + 1 = 7
+            x = (7 - 1) / 2
 
-if "chat" not in st.session_state:
-    st.session_state.chat = model.start_chat()
+            ' Tampilkan solusi di MsgBox
+            MsgBox "Solusi dari persamaan 2x + 1 = 7 adalah x = " & x
 
-user_input = st.text_input("Ketik pesan...")
+            ' Atau, tampilkan solusi di cell tertentu (misalnya, A1)
+            'ThisWorkbook.Sheets("Sheet1").Range("A1").Value = x
+            End Sub
+        ''',language="vba")
+        st.markdown('''
+        <div style="font-family:'snap itc';font-size:20px">Hasil Media</div>
+        ''',unsafe_allow_html=True)
+        st.video("https://res.cloudinary.com/ikip-siliwangi/video/upload/v1741873180/Recording_48_xmn49z.mp4")
+        st.markdown('''
+        <div style="font-family:'snap itc';font-size:20px">Rancangan Pengembangan</div>
+        ''',unsafe_allow_html=True)
+        st.image("https://res.cloudinary.com/ikip-siliwangi/image/upload/v1741874890/rancangan1_ddpurw.jpg")
+        st.markdown('''
+        <div style="font-family:'snap itc';font-size:20px">Koding Hasil Pengembangan</div>
+        ''',unsafe_allow_html=True)
+        st.code('''
+            Sub tampilan()
+    'Deklarasi persamaan dengan tipe string
+    Dim persamaan As String
+    'Deklarasi lembar dengan tipe worksheet
+    Dim lembar As Worksheet
+    'Aktifkan sheet1
+    Set lembar = Worksheets("Sheet1")
+    'persamaan akan menyimpan teks dari inputbox sesuai pengguna memasukan
+    persamaan = InputBox("Masukan Persamaan")
+    'Menampilkan hasil penulisan dari pengguna
+    lembar.Shapes("persamaan_linear").TextFrame.Characters.Text = persamaan
+End Sub
 
-if st.button("Kirim") and user_input:
-    response = st.session_state.chat.send_message(user_input)
-    st.write("🧠 **Robot AI:**", response.text)
+Sub hasilnya()
+    'Deklarasi persamaan dengan tipe string
+    Dim persamaan As String
+    'Deklarasi untuk variabel
+    Dim nilai1, nilai2, nilai3 As Integer
+    'Deklarasi lembar dengan tipe worksheet
+    Dim lembar As Worksheet
+    'Aktifkan sheet1
+    Set lembar = Worksheets("Sheet1")
+    'Ambil teks dari persamaan_linear ke persamaan
+    persamaan = lembar.Shapes("persamaan_linear").TextFrame.Characters.Text
+    'pisahkan teks persamaan dengan = menggunakan fungsi split
+    pisahkan = Split(persamaan, "=")
+    'ambil nilai pada ruas kanan pada urutan kedua atau indeks 1 dari pisahkan ke nilai3
+    nilai3 = Trim(pisahkan(1))
+    'pada ruas kiri pisahkan urutan pertama atau indeks 0 dari pisahkan dengan simbol + menggunakan fungsi split simpan di pisahkan1
+    pisahkan1 = Split(pisahkan(0), "+")
+    'ambil nilai pada bagian pisahkan1 pada urutan kedua atau indeks 1 dari pisahkan1 ke nilai2
+    nilai2 = Trim(pisahkan1(1))
+    'pada variabel x pisahkan urutan pertama atau indeks 0 dari pisahkan1 dengan simbol x menggunakan fungsi split simpan di pisahkan2
+    pisahkan2 = Split(pisahkan1(0), "x")
+    'ambil nilai pada bagian pisahkan2 pada urutan pertama atau indeks 0 dari pisahkan1 ke nilai1
+    nilai1 = Trim(pisahkan2(0))
+    'Menampilkan hasil akhir di gamabr teks yang bernama hasil_akhir
+    lembar.Shapes("hasil_akhir").TextFrame.Characters.Text = "jika " & persamaan & " maka hasil x = " & (nilai3 - nilai2) / nilai1
+End Sub
 
+        ''', language="vba")
+        st.video("https://res.cloudinary.com/ikip-siliwangi/video/upload/v1741877752/Recording_49_qfrpfp.mp4")
+        st.markdown('''
+        <div style="font-family:'snap itc';font-size:20px">Pengembangan</div>
+        ''',unsafe_allow_html=True)
+        st.write("Buat skenario untuk mengembangkan di atas misalkan kondisi penjumlahan atau pengurangan dan kondisi bilangan positif, nol, dan negatif")
+        st.write("Masukan hasilnya jika sudah melakukan pengembangan")
+        tulisan_html1='''
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload File to Firebase</title>
+    <style>
+      body {
+         font-family: Arial, sans-serif;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         height: 100vh;
+         background-color: #f0f0f0;
+         margin: 0;
+      }
+      h1 {
+         color: #333;
+      }
+      #fileInput {
+         margin-bottom: 20px;
+      }
+      #progressContainer {
+         margin-top: 20px;
+         width: 100%;
+         max-width: 400px;
+      }
+
+      progress {
+         width: 100%;
+      }
+
+</style>
+</head>
+<body>
+    <h1>Upload File VBA for Excel</h1>
+    <input type="file" id="fileInput">
+    <button id="uploadButton">Upload</button>
+    <div id="progressContainer">
+        <progress id="uploadProgress" value="0" max="100"></progress>
+    </div>
+    
+    <script type="module">
+            // Import modul Firebase yang diperlukan
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+      import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-storage.js";
+
+      // Firebase configuration
+      const firebaseConfig = {
+         apiKey: "AIzaSyCS-04HW1WAL3aLJkA7Zrmz2iedWVeaKKk",
+        authDomain: "helpful-rope-333907.firebaseapp.com",
+        databaseURL: "https://helpful-rope-333907-default-rtdb.firebaseio.com",
+        projectId: "helpful-rope-333907",
+        storageBucket: "helpful-rope-333907.appspot.com",
+        messagingSenderId: "854982010261",
+        appId: "1:854982010261:web:586875587b2a81f679829c",
+        measurementId: "G-8XEM0H16H0"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const storage = getStorage(app);
+
+      // Get elements
+      const fileInput = document.getElementById('fileInput');
+      const uploadButton = document.getElementById('uploadButton');
+      const uploadProgress = document.getElementById('uploadProgress');
+
+      uploadButton.addEventListener('click', () => {
+         const file = fileInput.files[0];
+         if (file) {
+            uploadFile(file);
+         } else {
+            alert('Please choose a file first.');
+         }
+      });
+
+      function uploadFile(file) {
+         const storageRef = ref(storage, 'hasilnya/' + file.name);
+         const uploadTask = uploadBytesResumable(storageRef, file);
+
+         uploadTask.on('state_changed', 
+            (snapshot) => {
+                  // Observe state change events such as progress, pause, and resume
+                  const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                  uploadProgress.value = progress;
+                  console.log('Upload is ' + progress + '% done');
+            }, 
+            (error) => {
+                  // Handle unsuccessful uploads
+                  console.error('Upload failed:', error);
+            }, 
+            () => {
+                  // Handle successful uploads on complete
+                  getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                     console.log('File available at', downloadURL);
+                  });
+            }
+         );
+      }
+
+    </script>
+</body>
+</html>
+
+        '''
+        st.components.v1.html(tulisan_html1, height=400)
+    with bagian1[1]:
+        st.button("Tampilkan AI",on_click=nyalakan)
+    with bagian1[0]:
+        st.markdown('''
+        <div style="font-family:'snap itc';font-size:20px">Pendahuluan</div>
+        ''',unsafe_allow_html=True)
+        st.image("https://res.cloudinary.com/ikip-siliwangi/image/upload/v1741915021/rancangan2_ss1lkh.jpg")
+        st.write("Tratner, dkk. (2022)")
+        with st.container(border=True):
+            st.markdown('''
+        <div style="font-family:'snap itc';font-size:16px">penjelasan</div>
+        ''',unsafe_allow_html=True)
+            tulisan = '''
+        <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penjelasan Diagram Media Pembelajaran AI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        ul {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h3>Penjelasan Diagram Media Pembelajaran AI</h3>
+
+    <div class="section">
+        <h4>1. Memahami Pengalaman Media</h4>
+        <p>Dimulai dengan <strong>analisis penyelesaian soal menggunakan AI</strong>, yang membantu dalam memahami bagaimana AI dapat menyelesaikan soal matematika.</p>
+        <ul>
+            <li>AI mengumpulkan data dan menyesuaikan dengan kemampuan berpikir pengguna.</li>
+            <li>Membantu dalam menghasilkan media pembelajaran berbasis AI.</li>
+            <li>Contoh: Hasil coding VBA untuk Excel menurut AI.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h4>2. Pemodelan Pengguna, Personalisasi, dan Keterlibatan</h4>
+        <p>Berdasarkan pemahaman terhadap pengalaman media, sistem mulai <strong>memodelkan pengguna</strong>, termasuk aspek personalisasi dan keterlibatan dalam pembelajaran.</p>
+        <p>Hasil pemodelan ini dievaluasi sebelum melanjutkan ke tahap produksi konten.</p>
+    </div>
+
+    <div class="section">
+        <h4>3. Analisis dan Produksi Konten Media</h4>
+        <p>Dari hasil pemodelan pengguna, sistem mulai <strong>menganalisis dan memproduksi konten media</strong>.</p>
+        <ul>
+            <li>Menyesuaikan skenario media pembelajaran.</li>
+            <li>Menambahkan coding VBA untuk menyesuaikan rancangan skenario.</li>
+            <li>Mengembangkan konten berdasarkan hasil evaluasi pemodelan pengguna.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h4>4. Interaksi dan Aksesibilitas Konten Media</h4>
+        <p>Setelah konten diproduksi, langkah selanjutnya adalah <strong>implementasi dan evaluasi oleh pengguna</strong>.</p>
+        <p>Reaksi pengguna menjadi faktor penting dalam menyesuaikan aksesibilitas dan efektivitas media pembelajaran.</p>
+    </div>
+
+    <div class="section">
+        <h4>5. Teknologi Bahasa Alami</h4>
+        <p>Hasil akhir yang diharapkan dari seluruh proses ini adalah model pembelajaran berbasis <strong>teknologi bahasa alami</strong>.</p>
+        <ul>
+            <li>Dengan NLP (Natural Language Processing), media pembelajaran dapat berinteraksi dengan pengguna secara lebih cerdas.</li>
+            <li>Menyesuaikan bahasa dengan pemahaman siswa.</li>
+        </ul>
+    </div>
+
+    <h4>Kesimpulan</h4>
+    <p>Diagram ini menunjukkan pendekatan berbasis AI dalam pengembangan media pembelajaran interaktif menggunakan <strong>VBA for Excel</strong>. Setiap langkah membantu membangun sistem pembelajaran yang lebih efektif dan adaptif.</p>
+</body>
+</html>
+        '''
+            st.components.v1.html(tulisan,height=1300)
+        st.markdown('''
+        <div style="font-family:'snap itc';font-size:16px">Referensi</div>
+        ''',unsafe_allow_html=True)
+        st.write("Trattner, C., Jannach, D., Motta, E., Costera Meijer, I., Diakopoulos, N., Elahi, M., ... & Moe, H. (2022). Responsible media technology and AI: challenges and research directions. AI and Ethics, 2(4), 585-594.")
+    with bagian1[3]:
+        st.markdown('''
+        <div style="font-family:'snap itc';font-size:16px">Pendapat dan Masukan</div>
+        ''',unsafe_allow_html=True)
+        tulisan1=f'''
+            <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <style>
+                #komentar{{
+                    border : 2px solid black;
+                    border-radius:10px;
+                    padding:5px;
+                    background-color:yellow;
+                }}
+            </style>
+        </head>
+        <body>
+            <div id="komentar"><strong><h3 style="color:red; font-family:'snap itc';font-size:18px">Masukan Komentar</h3></strong><br>
+                <label for="nama">Nama:</label>
+                <input type="text" id="nama" name="nama" value={st.session_state.nama}>
+                <label for="nim">NIM: </label>
+                <input type="text" id="nim" name="nim" value={st.session_state.NIM}><br><br>
+                <strong><h4 style="color:black; font-family:'snap itc';font-size:15px">Masukan Pendapat Anda Ketika Mempelajari Media ini</h4></strong><br>
+                <textarea id="masukan"></textarea><br>
+                <strong><h4 style="color:black; font-family:'snap itc';font-size:16px">Masukan Kesulitan Anda Ketika Mempelajari Media ini</h4></strong><br>
+                <textarea id="masuk1"></textarea><br>
+                <strong><h4 style="color:black; font-family:'snap itc';font-size:16px">Masukan deskripsikan keinginan Anda untuk membuat media matematika selanjutnya </h4></strong><br>
+                <textarea id="masuk2"></textarea><br>
+                <button id="kirim">Kirim</button>
+            </div>
+            <script type="module">
+            // Firebase configuration
+            const firebaseConfig = {{
+                apiKey: "AIzaSyCS-04HW1WAL3aLJkA7Zrmz2iedWVeaKKk",
+                authDomain: "helpful-rope-333907.firebaseapp.com",
+                databaseURL: "https://helpful-rope-333907-default-rtdb.firebaseio.com",
+                projectId: "helpful-rope-333907",
+                storageBucket: "helpful-rope-333907.appspot.com",
+                messagingSenderId: "854982010261",
+                appId: "1:854982010261:web:586875587b2a81f679829c",
+                measurementId: "G-8XEM0H16H0"
+            }};
+
+            // Initialize Firebase
+            import {{ initializeApp }} from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+            import {{ getDatabase, ref, set  }} from "https://www.gstatic.com/firebasejs/11.4.0/firebase-database.js";
+
+            const app = initializeApp(firebaseConfig);
+            const db = getDatabase(app);
+            var nim = document.getElementById("nim")
+            var nama = document.getElementById("nama")
+            var masukan = document.getElementById("masukan")
+            var masuk1 = document.getElementById("masuk1")
+            var masuk2 = document.getElementById("masuk2")
+            document.getElementById("kirim").addEventListener("click",()=>{{
+                set(ref(db, 'masukan2/' + nim.value), {{
+                    Nama: nama.value,
+                    Nim: nim.value,
+                    Masukan:masukan.value,
+                    Masukan1:masuk1.value,
+                    Masukan2:masuk2.value
+                }})
+                .then(()=>{{
+                        alert("Sudah Masuk")}})
+                .catch((error)=>{{
+                    alert(error)
+                }})
+            }})
+            </script>
+        
+        </body>
+        </html>
+        '''
+        st.components.v1.html(tulisan1,height=800)
+        tulisan2 = f'''
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #judul{{
+            text-align:center;
+            font-family:broadway;
+            color:green;
+            font-size:30px;
+        }}
+    </style>
+</head>
+<body>
+    <div id="judul"> ANGKET EVALUASI PEMBELAJARAN VBA FOR EXCEL DALAM PENDIDIKAN MATEMATIKA</div>
+    <div>
+        <div>
+            <label for="nama">Nama</label>
+            <input type="text" name="nama" id="nama" value={st.session_state['nama']}>
+        </div>
+        <div>
+            <label for="nim">NIM</label>
+            <input type="text" name="nim" id="nim" value={st.session_state['NIM']}>
+        </div>
+    </div>
+    <div><strong>Petunjuk pengisian</strong></div>
+    <div>Angket ini bertujuan untuk mengetahui pemahaman dan pengalaman Anda setelah mempelajari VBA for Excel dalam pendidikan matematika.<br>
+        Berikan penilaian terhadap setiap pernyataan berikut dengan skala:<br>
+        <ul>
+            <li>1 = Sangat Kurang</li>
+            <li>2 = Kurang</li>
+            <li>3 = Cukup</li>
+            <li>4 = Baik</li>
+            <li>5 = Sangat Baik</li>
+        </ul>
+    <div>
+        <ol type="A">
+            <li>Pemahaman Dasar VBA for Excel</li>
+            <ol>
+                <li>Saya memahami konsep dasar VBA for Excel.</li>
+                <input type="radio" name="A1" value="1">
+                <label for="A1">1</label>
+                <input type="radio" name="A1" value="2">
+                <label for="A1">2</label>
+                <input type="radio" name="A1" value="3">
+                <label for="A1">3</label>
+                <input type="radio" name="A1" value="4">
+                <label for="A1">4</label>
+                <input type="radio" name="A1" value="5">
+                <label for="A1">5</label>
+                <li>Saya dapat menulis dan menjalankan kode VBA sederhana.</li>
+                <input type="radio" name="A2" value="1">
+                <label for="A2">1</label>
+                <input type="radio" name="A2" value="2">
+                <label for="A2">2</label>
+                <input type="radio" name="A2" value="3">
+                <label for="A2">3</label>
+                <input type="radio" name="A2" value="4">
+                <label for="A2">4</label>
+                <input type="radio" name="A2" value="5">
+                <label for="A2">5</label>
+                <li>Saya dapat membuat massagebox dan inputbox dalam VBA untuk media interaktif.</li>
+                <input type="radio" name="A3" value="1">
+                <label for="A3">1</label>
+                <input type="radio" name="A3" value="2">
+                <label for="A3">2</label>
+                <input type="radio" name="A3" value="3">
+                <label for="A3">3</label>
+                <input type="radio" name="A3" value="4">
+                <label for="A3">4</label>
+                <input type="radio" name="A3" value="5">
+                <label for="A3">5</label>
+                <li>Saya dapat menghubungkan VBA dengan lembar kerja Excel secara efektif.</li>
+                <input type="radio" name="A4" value="1">
+                <label for="A4">1</label>
+                <input type="radio" name="A4" value="2">
+                <label for="A4">2</label>
+                <input type="radio" name="A4" value="3">
+                <label for="A4">3</label>
+                <input type="radio" name="A4" value="4">
+                <label for="A4">4</label>
+                <input type="radio" name="A4" value="5"">
+                <label for="A4">5</label>
+            </ol>
+            <li>Pembuatan Media Matematika dengan VBA</li>
+            <ol>
+                <li>Saya dapat membuat media pembelajaran berbasis VBA untuk konsep matematika tertentu.</li>
+                <input type="radio" name="B1" value="1">
+                <label for="B1">1</label>
+                <input type="radio" name="B1" value="2">
+                <label for="B1">2</label>
+                <input type="radio" name="B1" value="3">
+                <label for="B1">3</label>
+                <input type="radio" name="B1" value="4">
+                <label for="B1">4</label>
+                <input type="radio" name="B1" value="5">
+                <label for="B1">5</label>
+                <li>Saya mampu membuat tombol dan shape interaktif dan grafik dinamis menggunakan VBA.</li>
+                <input type="radio" name="B2" value="1">
+                <label for="B2">1</label>
+                <input type="radio" name="B2" value="2">
+                <label for="B2">2</label>
+                <input type="radio" name="B2" value="3">
+                <label for="B2">3</label>
+                <input type="radio" name="B2" value="4">
+                <label for="B2">4</label>
+                <input type="radio" name="B2" value="5">
+                <label for="B2">5</label>
+                <li>Saya dapat mengotomatisasi perhitungan matematika menggunakan VBA.</li>
+                <input type="radio" name="B3" value="1"">
+                <label for="B3">1</label>
+                <input type="radio" name="B3" value="2">
+                <label for="B3">2</label>
+                <input type="radio" name="B3" value="3">
+                <label for="B3">3</label>
+                <input type="radio" name="B3" value="4">
+                <label for="B3">4</label>
+                <input type="radio" name="B3" value="5">
+                <label for="B3">5</label>
+                <li>Saya mampu membuat simulasi atau animasi matematika dengan VBA.</li>
+                <input type="radio" name="B4" value="1">
+                <label for="B4">1</label>
+                <input type="radio" name="B4" value="2">
+                <label for="B4">2</label>
+                <input type="radio" name="B4" value="3">
+                <label for="B4">3</label>
+                <input type="radio" name="B4" value="4">
+                <label for="B4">4</label>
+                <input type="radio" name="B4" value="5">
+                <label for="B4">5</label>
+            </ol>
+            <li>Integrasi VBA dengan Generative AI</li>
+            <ol>
+                <li>Saya memahami konsep dasar Generative AI.</li>
+                <input type="radio" name="C1" value="1">
+                <label for="C1">1</label>
+                <input type="radio" name="C1" value="2">
+                <label for="C1">2</label>
+                <input type="radio" name="C1" value="3">
+                <label for="C1">3</label>
+                <input type="radio" name="C1" value="4">
+                <label for="C1">4</label>
+                <input type="radio" name="C1" value="5">
+                <label for="C1">5</label>
+                <li>Saya mengetahui cara mengembangkan Media VBA hasil dari AI seperti OpenAI.</li>
+                <input type="radio" name="C2" value="1">
+                <label for="C2">1</label>
+                <input type="radio" name="C2" value="2">
+                <label for="C2">2</label>
+                <input type="radio" name="C2" value="3">
+                <label for="C2">3</label>
+                <input type="radio" name="C2" value="4">
+                <label for="C2">4</label>
+                <input type="radio" name="C2" value="5">
+                <label for="C2">5</label>
+                <li>Saya mampu mengembangkan media matematika yang menggunakan AI dari soal otomatis.</li>
+                <input type="radio" name="C3" value="1">
+                <label for="C3">1</label>
+                <input type="radio" name="C3" value="2">
+                <label for="C3">2</label>
+                <input type="radio" name="C3" value="3">
+                <label for="C3">3</label>
+                <input type="radio" name="C3" value="4">
+                <label for="C3">4</label>
+                <input type="radio" name="C3" value="5">
+                <label for="C3">5</label>
+                <li>Saya dapat memanfaatkan Generative AI untuk memberikan solusi atau penjelasan otomatis dalam media pembelajaran.</li>
+                <input type="radio" name="C4" value="1">
+                <label for="C4">1</label>
+                <input type="radio" name="C4" value="2">
+                <label for="C4">2</label>
+                <input type="radio" name="C4" value="3">
+                <label for="C4">3</label>
+                <input type="radio" name="C4" value="4">
+                <label for="C4">4</label>
+                <input type="radio" name="C4" value="5">
+                <label for="C4">5</label>
+                <li>Saya dapat mengintegrasikan AI dengan VBA untuk meningkatkan interaktivitas media pembelajaran.</li>
+                <input type="radio" name="C5" value="1">
+                <label for="C5">1</label>
+                <input type="radio" name="C5" value="2">
+                <label for="C5">2</label>
+                <input type="radio" name="C5" value="3">
+                <label for="C5">3</label>
+                <input type="radio" name="C5" value="4">
+                <label for="C5">4</label>
+                <input type="radio" name="C5" value="5">
+                <label for="C5">5</label>
+            </ol>
+            <li>Implementasi dan Evaluasi Media</li>
+            <ol>
+                <li>Saya dapat menguji keefektifan media pembelajaran yang dibuat dengan VBA dan AI.</li>
+                <input type="radio" name="D1" value="1">
+                <label for="D1">1</label>
+                <input type="radio" name="D1" value="2">
+                <label for="D1">2</label>
+                <input type="radio" name="D1" value="3">
+                <label for="D1">3</label>
+                <input type="radio" name="C1" value="4">
+                <label for="D1">4</label>
+                <input type="radio" name="D1" value="5">
+                <label for="D1">5</label>
+                <li>Saya mampu memperbaiki dan mengembangkan media berdasarkan evaluasi pengguna.</li>
+                <input type="radio" name="D2" value="1">
+                <label for="D2">1</label>
+                <input type="radio" name="D2" value="2">
+                <label for="D2">2</label>
+                <input type="radio" name="D2" value="3">
+                <label for="D2">3</label>
+                <input type="radio" name="D2" value="4">
+                <label for="D2">4</label>
+                <input type="radio" name="D2" value="5">
+                <label for="D2">5</label>
+                <li>Saya dapat mengajarkan atau mendemonstrasikan media yang saya buat kepada orang lain.</li>
+                <input type="radio" name="D3" value="1">
+                <label for="D3">1</label>
+                <input type="radio" name="D3" value="2">
+                <label for="D3">2</label>
+                <input type="radio" name="D3" value="3">
+                <label for="D3">3</label>
+                <input type="radio" name="D3" value="4">
+                <label for="D3">4</label>
+                <input type="radio" name="D3" value="5">
+                <label for="D3">5</label>
+                <li>Saya percaya bahwa penggunaan VBA dan Generative AI dapat meningkatkan efektivitas pembelajaran matematika.</li>
+                <input type="radio" name="D4" value="1">
+                <label for="C4">1</label>
+                <input type="radio" name="D4" value="2">
+                <label for="D4">2</label>
+                <input type="radio" name="D4" value="3">
+                <label for="D4">3</label>
+                <input type="radio" name="D4" value="4">
+                <label for="D4">4</label>
+                <input type="radio" name="D4" value="5">
+                <label for="D4">5</label>
+            </ol>
+        </ol>
+    </div>
+    </div>
+    <button id="kirim">Kirimkan</button>
+    <script type="module">
+        var A1 = document.getElementsByName("A1")
+        var A2 = document.getElementsByName("A2")
+        var A3 = document.getElementsByName("A3")
+        var A4 = document.getElementsByName("A4")
+        var A5 = document.getElementsByName("A5")
+        var B1 = document.getElementsByName("B1")
+        var B2 = document.getElementsByName("B2")
+        var B3 = document.getElementsByName("B3")
+        var B4 = document.getElementsByName("B4")
+        var B5 = document.getElementsByName("B5")
+        var C1 = document.getElementsByName("C1")
+        var C2 = document.getElementsByName("C2")
+        var C3 = document.getElementsByName("C3")
+        var C4 = document.getElementsByName("C4")
+        var C5 = document.getElementsByName("C5")
+        var D1 = document.getElementsByName("D1")
+        var D2 = document.getElementsByName("D2")
+        var D3 = document.getElementsByName("D3")
+        var D4 = document.getElementsByName("D4")
+        var D5 = document.getElementsByName("D5")
+        var pilihan = [A1,A2,A3,A4,A5,B1,B2,B3,B4,B5,C1,C2,C3,C4,C5,D1,D2,D3,D4,D5]
+        var jawaban = []
+        const firebaseConfig = {{
+                apiKey: "AIzaSyCS-04HW1WAL3aLJkA7Zrmz2iedWVeaKKk",
+                authDomain: "helpful-rope-333907.firebaseapp.com",
+                databaseURL: "https://helpful-rope-333907-default-rtdb.firebaseio.com",
+                projectId: "helpful-rope-333907",
+                storageBucket: "helpful-rope-333907.appspot.com",
+                messagingSenderId: "854982010261",
+                appId: "1:854982010261:web:586875587b2a81f679829c",
+                measurementId: "G-8XEM0H16H0"
+            }};
+
+            // Initialize Firebase
+            import {{ initializeApp }} from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+            import {{ getDatabase, ref, set  }} from "https://www.gstatic.com/firebasejs/11.4.0/firebase-database.js";
+            const app = initializeApp(firebaseConfig);
+            const db = getDatabase(app);
+            var nama = document.getElementById("nama")
+            var nim = document.getElementById("nim")
+        document.getElementById("kirim").addEventListener("click",()=>{{
+            jawaban=[]
+            for(var j in pilihan){{
+                console.log(j)
+                for(var i of pilihan[j]){{
+                    if(i.checked){{
+                        jawaban.push(i.value)
+                    }}
+                }}
+            }}
+            console.log(jawaban)
+            set(ref(db, 'pilihan1/' + nim.value), {{
+                    Nama: nama.value,
+                    Nim: nim.value,
+                    pilihan:JSON.stringify(jawaban)
+                }})
+                .then(()=>{{
+                        alert("Sudah Masuk")}})
+                .catch((error)=>{{
+                    alert(error)
+                }})
+        }})
+    </script>
+</body>
+</html>
+    '''
+        st.components.v1.html(tulisan2,height=1400)
+
+if st.session_state['genai']:
+    st.session_state.isian = st.text_input("Masukan permintaan", value = st.session_state.isian)
+    if st.session_state.isian:
+        # Buat prompt dan kirim ke model
+        response = model.generate_content(st.session_state.isian)
+        st.write(response.text)
