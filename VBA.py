@@ -380,6 +380,12 @@ if st.sidebar.button("Pelajaran pertama"):
         st.write("Contoh Video Kesebelas")
         with st.expander("Lihat Video kesebelas"):
             st.video("https://res.cloudinary.com/ikip-siliwangi/video/upload/v1740997523/Recording_43_b2mmv6.mp4")
+        st.markdown('''
+            <div class="pengantar" style="background-color:cyan;color:black">Menyimpan dan Membuka Workbook<br>
+            🔹  Contoh: Menjalankan Sub secara Otomatis dalam 5 Detik</div>''',unsafe_allow_html=True)
+        st.write("Contoh Video Kedua belas (Menyimpan dan Membuka workbook)")
+        with st.expander("Lihat Video kedua belas (Menyimpan dan Membuka Workbook)"):
+            st.video("https://res.cloudinary.com/ikip-siliwangi/video/upload/v1742123425/Recording_50_cz9o3u.mp4")
     with bagian[2]:
         st.markdown('''
                     <div style="font-family:'snap itc'; font-size:20px; color:green">Contoh Operasi Hitung</div>
