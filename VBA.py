@@ -9,7 +9,14 @@ genai.configure(api_key=API_KEY)
 
 # Pilih model Gemini (misalnya, Gemini 1.5 Pro)
 model = genai.GenerativeModel("gemini-1.5-pro")
-
+if 'kond' not in st.session_state:
+    st.session_state.kond = False
+if 'kond1' not in st.session_state:
+    st.session_state.kond1 = {'kondisi1':False,'kondisi2':False,'kondisi3':False}
+if 'kumpulan' not in st.session_state:
+    st.session_state.kumpulan = []
+if 'nilai' not in st.session_state:
+    st.session_state.nilai = 0
 st.markdown('''
     <style>
            #judul{
@@ -65,6 +72,7 @@ if "NIM" not in st.session_state:
 st.session_state["nama"]=st.sidebar.text_input("Masukan Nama Anda: ",value=st.session_state["nama"])
 st.session_state["NIM"]=st.sidebar.text_input("Masukan Nim Anda: ",value=st.session_state["NIM"])
 if st.sidebar.button("Pelajaran pertama"):
+    st.session_state.kond = False
     bagian = st.tabs(["Kata Pengantar","Mengenal Module", "Contoh Media", "Penilaian dan Masukan"])
     with bagian[0]:
         st.markdown('''
@@ -381,12 +389,8 @@ if st.sidebar.button("Pelajaran pertama"):
         with st.expander("Lihat Video kesebelas"):
             st.video("https://res.cloudinary.com/ikip-siliwangi/video/upload/v1740997523/Recording_43_b2mmv6.mp4")
         st.markdown('''
-                    <div style="font-family:'snap itc'; font-size:16px; color:green">Menyimpan dan Membuka Workbook</div>
-                    ''',unsafe_allow_html=True)
-        st.markdown('''
             <div class="pengantar" style="background-color:cyan;color:black">Menyimpan dan Membuka Workbook<br>
-            🔹  Gunakan save type Excel Macro-Enabled Workbook <br>
-            🔹  Projek yang dibuat tidak hilang ketika sudah di close </div>''',unsafe_allow_html=True)
+            🔹  Contoh: Menjalankan Sub secara Otomatis dalam 5 Detik</div>''',unsafe_allow_html=True)
         st.write("Contoh Video Kedua belas (Menyimpan dan Membuka workbook)")
         with st.expander("Lihat Video kedua belas (Menyimpan dan Membuka Workbook)"):
             st.video("https://res.cloudinary.com/ikip-siliwangi/video/upload/v1742123425/Recording_50_cz9o3u.mp4")
@@ -940,6 +944,7 @@ def matikan():
     st.session_state['genai'] = False
 
 if st.sidebar.button("Pelajaran Kedua"):
+    st.session_state.kond = False
     bagian1 = st.tabs(["Kata Pengantar","Contoh Penggunaan AI", "Media AI", "Penilaian dan Masukan"])
     with bagian1[2]:
         st.session_state['genai'] = False
@@ -1608,6 +1613,512 @@ End Sub
     '''
         st.components.v1.html(tulisan2,height=1400)
 
+
+if st.sidebar.button("Pelajaran Ketiga"):
+    st.session_state.kond = True
+
+if st.session_state.kond:
+    daftar = st.tabs(["Pendahuluan","contoh Media","Menggunakan Generative AI", "Penilaian dan Masukan"])
+    with daftar[0]:
+        st.write("Pendahuluan")
+        st.image("https://res.cloudinary.com/ikip-siliwangi/image/upload/v1742192974/diagram1_oo4s86.png")
+        tulisan3='''
+            <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penjelasan Diagram</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; }
+        h2 { color: #2c3e50; }
+        .section { margin-bottom: 20px; }
+        ul { margin-left: 20px; }
+    </style>
+</head>
+<body>
+    <h2>Penjelasan Diagram</h2>
+    
+    <div class="section">
+        <h3>1. Input Bahan Pembelajaran</h3>
+        <p>Proses dimulai dengan bahan pembelajaran berupa:</p>
+        <ul>
+            <li><strong>Soal</strong></li>
+            <li><strong>Materi</strong></li>
+        </ul>
+        <p>Bahan ini digunakan untuk mengidentifikasi <strong>Permasalahan dalam Materi Matematika</strong>.</p>
+    </div>
+    
+    <div class="section">
+        <h3>2. Proses Pemanfaatan Generative AI</h3>
+        <p>Permasalahan dalam materi matematika diproses dengan:</p>
+        <ul>
+            <li><strong>Generative AI</strong></li>
+            <li><strong>Pemanfaatan API</strong></li>
+            <li><strong>Streamlit dan Python</strong></li>
+        </ul>
+        <p>Hasilnya berupa <strong>program dan produk</strong> yang akan digunakan dalam media pembelajaran.</p>
+    </div>
+    
+    <div class="section">
+        <h3>3. Hasil Generative AI → Media Pembelajaran Pertama</h3>
+        <p>Program dan produk yang dihasilkan digunakan untuk membangun <strong>Media Pembelajaran Pertama</strong>.</p>
+        <p>Dalam tahap ini, digunakan:</p>
+        <ul>
+            <li><strong>Bahasa Program VBA for Excel</strong></li>
+            <li><strong>Bentuk Gambar (Shape)</strong></li>
+        </ul>
+    </div>
+    
+    <div class="section">
+        <h3>4. Evaluasi dan Pengembangan Media Selanjutnya</h3>
+        <p>Media Pembelajaran Pertama dievaluasi, kemudian dikembangkan menjadi:</p>
+        <ul>
+            <li><strong>Media Pembelajaran Kedua</strong></li>
+        </ul>
+        <p>Analisis dilakukan terhadap berbagai aspek termasuk bentuk gambar.</p>
+    </div>
+    
+    <div class="section">
+        <h3>5. Penilaian dan Pengembangan Lebih Lanjut</h3>
+        <p>Setelah evaluasi, dilakukan:</p>
+        <ul>
+            <li><strong>Penilaian dan Masukan</strong></li>
+            <li>Pengembangan menjadi <strong>Media Pembelajaran Ketiga</strong></li>
+        </ul>
+        <p>Proses ini memastikan media pembelajaran menjadi lebih efektif.</p>
+    </div>
+    
+    <h3>Kesimpulan</h3>
+    <p>Diagram ini menggambarkan proses iteratif pengembangan media pembelajaran berbasis teknologi, yang mencakup:</p>
+    <ul>
+        <li>Identifikasi masalah dalam materi matematika</li>
+        <li>Penggunaan AI dan pemrograman untuk menghasilkan solusi</li>
+        <li>Evaluasi dan pengembangan media pembelajaran secara berkelanjutan</li>
+    </ul>
+    <p>Tujuan akhirnya adalah menciptakan <strong>media pembelajaran yang lebih efektif</strong> melalui siklus analisis, penilaian, dan perbaikan terus-menerus.</p>
+</body>
+</html>
+
+    '''
+        st.components.v1.html(tulisan3,height=1000)
+    with daftar[1]:
+        st.header("contoh media")
+        st.subheader("Media pembelajaran yang dipilih")
+        with st.container(border=True):
+            st.write("Buatkan media pembelajaran matematika menggunakan shape di VBA for Excel")
+        st.markdown('''
+        <div style="font-family:'snap itc';font-size:16px">Hasil Generative AI</div>
+        ''',unsafe_allow_html=True)
+        st.code('''
+            Sub PeluangKoin()
+' Deklarasi variabel
+  Dim sisiKoin As Integer, hasilLemparan As Integer
+  Dim peluangKepala As Double, peluangEkor As Double
+  Dim i As Integer, jumlahLemparan As Integer
+
+  ' Input jumlah lemparan
+  jumlahLemparan = InputBox("Masukkan jumlah lemparan koin:", "Simulasi Lemparan Koin", 100)
+  If jumlahLemparan < 1 Then Exit Sub ' Keluar jika input tidak valid
+
+
+  ' Buat Shapes untuk representasi koin
+  With ActiveSheet.Shapes.AddShape(msoShapeOval, 100, 50, 50, 50)
+    .Name = "Koin"
+    .Fill.ForeColor.RGB = RGB(255, 255, 0) ' Kuning
+    .Line.Visible = msoFalse
+  End With
+
+  ' Buat Shapes untuk representasi hasil
+  With ActiveSheet.Shapes.AddShape(msoShapeRectangle, 200, 50, 100, 50)
+    .Name = "Hasil"
+    .Fill.ForeColor.RGB = RGB(255, 255, 255) ' Putih
+    .TextFrame.Characters.Text = ""
+  End With
+
+  ' Simulasi lemparan koin
+  For i = 1 To jumlahLemparan
+
+    ' Generate angka acak 0 atau 1 (0 = Kepala, 1 = Ekor)
+    sisiKoin = Int(Rnd * 2)
+
+    ' Update tampilan koin (animasi sederhana)
+    If sisiKoin = 0 Then
+      ActiveSheet.Shapes("Koin").Fill.ForeColor.RGB = RGB(255, 255, 0) ' Kuning (Kepala)
+    Else
+      ActiveSheet.Shapes("Koin").Fill.ForeColor.RGB = RGB(192, 192, 192) ' Abu-abu (Ekor)
+    End If
+
+    DoEvents ' Penting untuk update tampilan
+
+    ' Hitung hasil
+    If sisiKoin = 0 Then
+      hasilLemparan = hasilLemparan + 1
+    End If
+
+
+    ' Hitung dan tampilkan peluang
+    peluangKepala = hasilLemparan / i
+    peluangEkor = (i - hasilLemparan) / i
+
+    ActiveSheet.Shapes("Hasil").TextFrame.Characters.Text = "Kepala: " & Format(peluangKepala, "0.0%") & vbCrLf & "Ekor: " & Format(peluangEkor, "0.0%")
+
+    ' Jeda sebentar untuk melihat animasi (opsional)
+    Application.Wait Now + TimeValue("0:00:01") ' Jeda 1 detik
+
+  Next i
+
+  MsgBox "Simulasi selesai!", vbInformation
+
+End Sub
+        ''',language="vb")
+        st.markdown('''
+        <div style="font-family:'snap itc';font-size:16px">Penjelasan Analisis Koding</div>
+        ''',unsafe_allow_html=True)
+        with st.container(border=True):
+            st.code('''
+                Dim sisiKoin As Integer, hasilLemparan As Integer
+                Dim peluangKepala As Double, peluangEkor As Double
+                Dim i As Integer, jumlahLemparan As Integer
+            ''',language="vb")
+        st.markdown('''
+            <div style="font-family:'comic sans ms' font-size:16px">
+                    <ol>
+                        <li>Deklarasi sisiKoin, hasilLemparan sebagai Integer</li>
+                        <li>peluangKepala, peluangEkor sebagai Double</li>
+                        <li>i dan jumlahLemparan sebagai Integer</li>
+                    </ol>
+                    <div>Integer adalah bilangan bulat positif sedangkan Double bilangan positif desimal</div>
+            </div>
+        ''', unsafe_allow_html=True)
+        with st.container(border=True):
+            st.code('''
+                jumlahLemparan = InputBox("Masukkan jumlah lemparan koin:", "Simulasi Lemparan Koin", 100)
+                If jumlahLemparan < 1 Then Exit Sub ' Keluar jika input tidak valid
+            ''',language="vb")
+        st.markdown('''
+            <div style="font-family:'comic sans ms' font-size:16px">
+                    Ketika program dijalankan Kotak masukan akan ditampilkan dan berisi 100 dan nilai tersebut
+                    tersimpan di jumlahLemparan. Jika jumlahLemparan kurang dari 1 maka keluar dari fungsi sub 
+                    peluangKoin atau program berhenti bekerja.
+            </div>
+        ''', unsafe_allow_html=True)
+        with st.container(border=True):
+            st.code('''
+                ' Buat Shapes untuk representasi koin
+                With ActiveSheet.Shapes.AddShape(msoShapeOval, 100, 50, 50, 50)
+                    .Name = "Koin"
+                    .Fill.ForeColor.RGB = RGB(255, 255, 0) ' Kuning
+                    .Line.Visible = msoFalse
+                End With
+            ''',language="vb")
+        st.markdown('''
+            <div style="font-family:'comic sans ms' font-size:16px">
+                    Buat gambar oval (lingkaran) yang posisinya x=100px dan y=50px,
+                    tinggi gambar 50px dan tinggi gambar 50px. Gambar tersebut
+                    diberi nama Koin. Warna backgroundnya kuning. Dan sisi gambar
+                    dihilangkan.
+            </div>
+        ''', unsafe_allow_html=True)
+        with st.container(border=True):
+            st.code('''
+                ' Buat Shapes untuk representasi hasil
+                With ActiveSheet.Shapes.AddShape(msoShapeRectangle, 200, 50, 100, 50)
+                    .Name = "Hasil"
+                    .Fill.ForeColor.RGB = RGB(255, 255, 255) ' Putih
+                    .TextFrame.Characters.Text = ""
+                End With
+            ''',language="vb")
+        st.markdown('''
+            <div style="font-family:'comic sans ms' font-size:16px">
+                    Buat gambar persegi panjang yang posisinya x=200px dan y=50px,
+                    tinggi gambar 100px dan tinggi gambar 50px. Gambar tersebut
+                    diberi nama Hasil. Warna backgroundnya potih. Tulisan dikosongkan.
+            </div>
+        ''', unsafe_allow_html=True)
+        with st.container(border=True):
+            st.code('''
+                ' Simulasi lemparan koin
+  For i = 1 To jumlahLemparan
+
+    ' Generate angka acak 0 atau 1 (0 = Kepala, 1 = Ekor)
+    sisiKoin = Int(Rnd * 2)
+
+    ' Update tampilan koin (animasi sederhana)
+    If sisiKoin = 0 Then
+      ActiveSheet.Shapes("Koin").Fill.ForeColor.RGB = RGB(255, 255, 0) ' Kuning (Kepala)
+    Else
+      ActiveSheet.Shapes("Koin").Fill.ForeColor.RGB = RGB(192, 192, 192) ' Abu-abu (Ekor)
+    End If
+
+    DoEvents ' Penting untuk update tampilan
+
+    ' Hitung hasil
+    If sisiKoin = 0 Then
+      hasilLemparan = hasilLemparan + 1
+    End If
+
+
+    ' Hitung dan tampilkan peluang
+    peluangKepala = hasilLemparan / i
+    peluangEkor = (i - hasilLemparan) / i
+
+    ActiveSheet.Shapes("Hasil").TextFrame.Characters.Text = "Kepala: " & Format(peluangKepala, "0.0%") & vbCrLf & "Ekor: " & Format(peluangEkor, "0.0%")
+
+    ' Jeda sebentar untuk melihat animasi (opsional)
+    Application.Wait Now + TimeValue("0:00:01") ' Jeda 1 detik
+
+  Next i
+            ''',language="vb")
+        st.markdown('''
+            <div style="font-family:'comic sans ms' font-size:16px; text-align:justify">
+                    Kemudian program akan berjalan secara berulang 1 sampai 100 kali
+                    (sesuai dengan jumlahLemparan). SisiKoin akan bernilai 0 sampai 1 secara acak.
+                    Jika sisiKoin sama dengan 0 maka warna background menjadi kuning.
+                    Jika sisiKoin sama dengan 1 maka warna background menjadi Abu-abu.
+                    Jika sisiKoin sama dengan 0 maka hasilLemparan akan bertambah 1.
+                    PeluangKepala akan terhitung sama dengan hasilLemparan dibagi i.
+                    PeluangEkor akan terhitung sama dengan (i-hasilLemparan) dibagi i.
+                    Program pengulangan akan berjalan setiap 1 detik akan terupdate.
+            </div>
+        ''', unsafe_allow_html=True)
+        with st.container(border=True):
+            st.code('''
+                MsgBox "Simulasi selesai!", vbInformation
+            ''',language="vb")
+        st.markdown('''
+            <div style="font-family:'comic sans ms' font-size:16px; text-align:justify">
+                Kotak keterangan akan muncul dan menjelaskan bahwa permainan sudah selesai.
+            </div>
+        ''', unsafe_allow_html=True)
+        st.video("https://res.cloudinary.com/ikip-siliwangi/video/upload/v1742216535/Recording_52_kxcqi5.mp4")
+        st.markdown('''
+        <div style="font-family:'snap itc';font-size:16px; color:blue">Evaluasi Media Kedua</div>
+        ''',unsafe_allow_html=True)
+        st.markdown('''
+            <div style="font-family:'comic sans ms' font-size:16px; text-align:justify">
+                <ol>
+                    <li>Pada pertama dijalankan gambar lingkaran berjalan dengan baik
+                        Namun menjalankan program kembali gambar lingkaran tidak berjalan
+                        ini dikarenakan lingkaran yang bernama koin terjadi duplikat, 
+                        disebabkan fungsi AddShape (membuat gambar secara otomatis)</li>
+                    <li> Demikian juga pada persegi panjang yang bernama Hasil 
+                        Pada pertama dijalankan gambar persegi panjang berjalan dengan baik
+                        Namun menjalankan program kembali gambar persegi panjang tidak berjalan
+                        ini dikarenakan persegi panjang yang bernama Hasil terjadi duplikat
+                        disebabkan fungsi AddShape (membuat gambar secara otomatis)</li>
+                    <li>Tulisan di dalam persegi panjang tidak ditampilkan karena warna huruf
+                        dan warna background warnanya sama yaitu putih.</li>
+                </ol>
+            </div>
+        ''', unsafe_allow_html=True)
+        st.markdown('''
+        <div style="font-family:'snap itc';font-size:16px; color:blue">Perbaikan Media Kedua</div>
+        ''',unsafe_allow_html=True)
+        st.markdown('''
+            <div style="font-family:'comic sans ms' font-size:16px; text-align:justify">
+                <ol>
+                    <li>Untuk mengantisipasi dari poin 1 dan 2 bagian Evaluasi Media Kedua
+                        maka diperlukan fungsi tambahan untuk menghapus duplikat (contoh: 
+                        Activesheet.Shapes("Koin").Delete), Fungsi tersebut harus di atas
+                        fungsi AddShape. Namun perlu ditambahkan <i>on Error esume Next</i>
+                        tempaykan bagian paling atas tapi di bawah sub peluangKoin</li>
+                    <li>Tulisan di dalam persegi panjang tidak ditampilkan karena warna huruf
+                        ditambahkan perintah fungsi contoh: ActiveSheet.Shapes("Hasil").textFrame.
+                        characters.Font.Color=vbBlack.</li>
+                </ol>
+            </div>
+        ''', unsafe_allow_html=True)
+        st.markdown('''
+        <div style="font-family:'snap itc';font-size:16px; color:blue">Hasil Media Kedua</div>
+        ''',unsafe_allow_html=True)
+        with st.container(border=True):
+            st.code('''
+            Sub PeluangKoin()
+
+On Error Resume Next 'Tambahan fungsi untuk mengabaikan terjadi error
+
+' Deklarasi variabel
+  Dim sisiKoin As Integer, hasilLemparan As Integer
+  Dim peluangKepala As Double, peluangEkor As Double
+  Dim i As Integer, jumlahLemparan As Integer
+
+  ' Input jumlah lemparan
+  jumlahLemparan = InputBox("Masukkan jumlah lemparan koin:", "Simulasi Lemparan Koin", 100)
+  If jumlahLemparan < 1 Then Exit Sub ' Keluar jika input tidak valid
+
+ActiveSheet.Shapes("Koin").Delete 'Menghapus gambar yang bernama Koin
+ActiveSheet.Shapes("Hasil").Delete 'Menghapus gambar yang bernama Hasil
+
+  ' Buat Shapes untuk representasi koin
+  With ActiveSheet.Shapes.AddShape(msoShapeOval, 100, 50, 50, 50)
+    .Name = "Koin"
+    .Fill.ForeColor.RGB = RGB(255, 255, 0) ' Kuning
+    .Line.Visible = msoFalse
+  End With
+
+  ' Buat Shapes untuk representasi hasil
+  With ActiveSheet.Shapes.AddShape(msoShapeRectangle, 200, 50, 100, 50)
+    .Name = "Hasil"
+    .Fill.ForeColor.RGB = RGB(255, 255, 255) ' Putih
+    .TextFrame.Characters.Text = ""
+    .TextFrame.Characters.Font.Color = vbBlack 'Memberikan warna huruf hitam
+  End With
+
+  ' Simulasi lemparan koin
+  For i = 1 To jumlahLemparan
+
+    ' Generate angka acak 0 atau 1 (0 = Kepala, 1 = Ekor)
+    sisiKoin = Int(Rnd * 2)
+
+    ' Update tampilan koin (animasi sederhana)
+    If sisiKoin = 0 Then
+      ActiveSheet.Shapes("Koin").Fill.ForeColor.RGB = RGB(255, 255, 0) ' Kuning (Kepala)
+    Else
+      ActiveSheet.Shapes("Koin").Fill.ForeColor.RGB = RGB(192, 192, 192) ' Abu-abu (Ekor)
+    End If
+
+    DoEvents ' Penting untuk update tampilan
+
+    ' Hitung hasil
+    If sisiKoin = 0 Then
+      hasilLemparan = hasilLemparan + 1
+    End If
+
+
+    ' Hitung dan tampilkan peluang
+    peluangKepala = hasilLemparan / i
+    peluangEkor = (i - hasilLemparan) / i
+
+    ActiveSheet.Shapes("Hasil").TextFrame.Characters.Text = "Kepala: " & Format(peluangKepala, "0.0%") & vbCrLf & "Ekor: " & Format(peluangEkor, "0.0%")
+
+    ' Jeda sebentar untuk melihat animasi (opsional)
+    Application.Wait Now + TimeValue("0:00:01") ' Jeda 1 detik
+
+  Next i
+
+  MsgBox "Simulasi selesai!", vbInformation
+End Sub
+        ''',language="vb")
+        st.write("Video Evaluasi Media kedua")
+        st.video("https://res.cloudinary.com/ikip-siliwangi/video/upload/v1742220594/Recording_53_ksaak0.mp4")
+    with daftar[2]:
+        st.write("Hasil Generative AI dan pengembangannya ")
+    with daftar[3]:
+        tulisan4 = f'''
+            <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <style>
+                #komentar{{
+                    border : 2px solid black;
+                    border-radius:10px;
+                    padding:5px;
+                    background-color:yellow;
+                }}
+            </style>
+        </head>
+        <body>
+            <div id="komentar"><strong><h3 style="color:red; font-family:'snap itc';font-size:18px">Masukan Komentar</h3></strong><br>
+                <label for="nama">Nama:</label>
+                <input type="text" id="nama" name="nama" value={st.session_state.nama}>
+                <label for="nim">NIM: </label>
+                <input type="text" id="nim" name="nim" value={st.session_state.NIM}><br><br>
+                <strong><h4 style="color:black; font-family:'snap itc';font-size:15px">Masukan tentang Pemahaman dan Penguasaan Teknis</h4></strong>
+                <ol>
+                    <li> Sejauh mana Anda merasa memahami dasar-dasar pemrograman VBA for Excel?</li>
+                    <li> Apa kesulitan utama yang Anda hadapi saat mengembangkan media matematika dengan VBA?</li>
+                    <li> Seberapa nyaman Anda dalam mengintegrasikan Generative AI dengan VBA?</li>
+                    <li>Menurut Anda, fitur apa yang perlu ditambahkan untuk meningkatkan efektivitas media pembelajaran berbasis VBA dan AI?</li>
+                </ol>
+                <textarea id="masukan"></textarea><br>
+                <strong><h4 style="color:black; font-family:'snap itc';font-size:16px">Masukan tentang Efektivitas Media</h4></strong>
+                <ol>
+                    <li> Bagaimana pendapat Anda tentang manfaat penggunaan Generative AI dalam pembuatan media matematika?</li>
+                    <li> Apakah media yang dibuat dapat membantu pemahaman konsep matematika dengan lebih baik? Jika ya, bagaimana? Jika tidak, mengapa?</li>
+                    <li> Apakah ada aspek tertentu dalam media yang perlu ditingkatkan agar lebih interaktif dan mudah digunakan?</li>
+                </ol>
+                <textarea id="masuk1"></textarea><br>
+                <strong><h4 style="color:black; font-family:'snap itc';font-size:16px">Masukan tentang Implementasi dan Penggunaan</h4></strong>
+                <ol>
+                    <li> Bagaimana tingkat kesulitan dalam menerapkan media pembelajaran ini dalam proses belajar mengajar?</li>
+                    <li> Menurut Anda, apakah media ini dapat digunakan secara luas oleh pengajar dan siswa? Apa yang perlu ditingkatkan agar lebih mudah diadopsi?</li>
+                    <li> Apa saran Anda untuk pengembangan lebih lanjut agar media ini lebih efektif dan bermanfaat?</li>
+                </ol>
+                <textarea id="masuk2"></textarea><br>
+                <strong><h4 style="color:black; font-family:'snap itc';font-size:16px">Koding apa yang Anda mau pelajari lebih dalam</h4></strong>
+                <textarea id="masuk3"></textarea><br>
+                <button id="kirim">Kirim</button>
+            </div>
+            <script type="module">
+            // Firebase configuration
+            const firebaseConfig = {{
+                apiKey: "AIzaSyCS-04HW1WAL3aLJkA7Zrmz2iedWVeaKKk",
+                authDomain: "helpful-rope-333907.firebaseapp.com",
+                databaseURL: "https://helpful-rope-333907-default-rtdb.firebaseio.com",
+                projectId: "helpful-rope-333907",
+                storageBucket: "helpful-rope-333907.appspot.com",
+                messagingSenderId: "854982010261",
+                appId: "1:854982010261:web:586875587b2a81f679829c",
+                measurementId: "G-8XEM0H16H0"
+            }};
+
+            // Initialize Firebase
+            import {{ initializeApp }} from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+            import {{ getDatabase, ref, set  }} from "https://www.gstatic.com/firebasejs/11.4.0/firebase-database.js";
+
+            const app = initializeApp(firebaseConfig);
+            const db = getDatabase(app);
+            var nim = document.getElementById("nim")
+            var nama = document.getElementById("nama")
+            var masukan = document.getElementById("masukan")
+            var masuk1 = document.getElementById("masuk1")
+            var masuk2 = document.getElementById("masuk2")
+            var masuk3 = document.getElementById("masuk3")
+            document.getElementById("kirim").addEventListener("click",()=>{{
+                set(ref(db, 'masukan3/' + nim.value), {{
+                    Nama: nama.value,
+                    Nim: nim.value,
+                    Masukan:masukan.value,
+                    Masukan1:masuk1.value,
+                    Masukan2:masuk2.value,
+                    Masukan3:masuk3.value
+                }})
+                .then(()=>{{
+                        alert("Sudah Masuk")}})
+                .catch((error)=>{{
+                    alert(error)
+                }})
+            }})
+            </script>
+        
+        </body>
+        </html>
+
+        '''
+        st.components.v1.html(tulisan4,height=1600)
+if st.session_state.kond:
+    st.markdown('''
+        <div style="font-family:'snap itc';font-size:16px;color:red">Menggunakan AI Generative</div>
+        ''',unsafe_allow_html=True)
+    for i in st.session_state.kumpulan:
+        with st.chat_message(i["role"]):
+            st.markdown(i["content"])
+        st.write("Masukan perintah")
+        
+if st.session_state.kond:
+    masukan = st.chat_input("Masukan perintah")
+    if masukan:
+        try:
+            st.session_state.kumpulan.append({"role":"user","content":masukan})
+            with st.chat_message("user"):
+                st.markdown(masukan)
+                response = model.generate_content(masukan)
+            st.session_state.kumpulan.append({"role":"assistant","content":response.text})
+            with st.chat_message("assistant"):
+                st.markdown(response.text)
+        except TypeError:
+            st.write("Masukan Perintah")
 if st.session_state['genai']:
     st.session_state.isian = st.text_input("Masukan permintaan", value = st.session_state.isian)
     if st.session_state.isian:
