@@ -61,7 +61,7 @@ st.markdown('''
 st.markdown('''
             
             <div id="judul">
-            Media Visual Basic Application for Excel
+            Media Belajar Coding Visual Basic Application for Excel
             </div>
             ''',unsafe_allow_html=True)
 st.sidebar.title("Masukan identitas Anda")
