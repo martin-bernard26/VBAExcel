@@ -2,7 +2,7 @@ import streamlit as st
 import google.generativeai as genai
 
 # Gantilah dengan API key Anda
-API_KEY = "AIzaSyA37GdJVKV1zZuB4B5NjFA_lYOoc5nZ8JA"
+API_KEY = "AIzaSyB05cTc7LBTlMXuUDFGGwPzs7uw5ErhQZo"
 
 # Konfigurasi API key
 genai.configure(api_key=API_KEY)
