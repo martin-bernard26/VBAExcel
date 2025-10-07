@@ -1173,7 +1173,7 @@ End Sub
         }
     </style>
 </head>
-<body>
+<body style="background-color:orange">
     <h3>Penjelasan Diagram Media Pembelajaran AI</h3>
 
     <div class="section">
@@ -2126,5 +2126,6 @@ if st.session_state['genai']:
         # Buat prompt dan kirim ke model
         response = model.generate_content(st.session_state.isian)
         st.write(response.text)
+
 
 
