@@ -34,6 +34,7 @@ st.markdown('''
                 padding: 5px;
                 margin:5px;
                 background-color:pink;
+                color:black;
             }
             #rps{
                 font-family:"bauhaus 93";
@@ -2125,3 +2126,4 @@ if st.session_state['genai']:
         # Buat prompt dan kirim ke model
         response = model.generate_content(st.session_state.isian)
         st.write(response.text)
+
