@@ -1637,7 +1637,7 @@ if st.session_state.kond:
         ul { margin-left: 20px; }
     </style>
 </head>
-<body>
+<body style="background-color:orange">
     <h2>Penjelasan Diagram</h2>
     
     <div class="section">
@@ -2126,6 +2126,7 @@ if st.session_state['genai']:
         # Buat prompt dan kirim ke model
         response = model.generate_content(st.session_state.isian)
         st.write(response.text)
+
 
 
 
