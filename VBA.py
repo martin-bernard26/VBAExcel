@@ -1318,7 +1318,7 @@ End Sub
         }}
     </style>
 </head>
-<body>
+<body style="background-color:cyan">
     <div id="judul"> ANGKET EVALUASI PEMBELAJARAN VBA FOR EXCEL DALAM PENDIDIKAN MATEMATIKA</div>
     <div>
         <div>
@@ -2126,6 +2126,7 @@ if st.session_state['genai']:
         # Buat prompt dan kirim ke model
         response = model.generate_content(st.session_state.isian)
         st.write(response.text)
+
 
 
 
